@@ -1,0 +1,22 @@
+https://cloud.google.com/cloud-build/docs/quickstart-build
+
+## BUILD 
+```
+gcloud beta artifacts repositories create quickstart-docker-repo --repository-format=docker \
+    --location=us-central1 --description="Docker repository"
+gcloud artifacts repositories list
+gcloud config get-value project
+gcloud builds submit --tag us-central1-docker.pkg.dev/tennisbana1/quickstart-docker-repo/quickstart-image:tag1
+```
+
+## DEPLOY
+export PROJECT_ID=$(gcloud config list --format='value(core.project)')
+export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com \
+    --role=roles/run.admin
+gcloud iam service-accounts add-iam-policy-binding \
+    $PROJECT_NUMBER-compute@developer.gserviceaccount.com \
+    --member=serviceAccount:$PROJECT_NUMBER@cloudbuild.gserviceaccount.com \
+    --role=roles/iam.serviceAccountUser
+gcloud builds submit --config cloudbuild.yaml

@@ -1,0 +1,10 @@
+#  gcloud builds submit --tag gcr.io/tennisbana1/django_on_cloudrun
+#  gcloud run deploy django-on-cloudrun --image gcr.io/tennisbana1/django_on_cloudrun --platform managed
+
+docker build . --tag gcr.io/tennisbana1/django_on_cloudrun 
+docker push gcr.io/tennisbana1/django_on_cloudrun 
+gcloud run deploy django-on-cloudrun --image gcr.io/tennisbana1/django_on_cloudrun --platform managed
+
+gcloud domains list-user-verified
+gcloud beta run domain-mappings create --service django-on-cloudrun --domain opentaproject.org
+gcloud beta run domain-mappings describe --domain opentaproject.org
