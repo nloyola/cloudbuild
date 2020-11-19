@@ -2,8 +2,7 @@ version: '3.7'
 
 services:
   web:
-    #image: "gcr.io/tennisbana1/cloudbuild1"
-    build: '.'
+    image: "gcr.io/tennisbana1/cloudbuild1"
     command:
       - /bin/sh
       - -c
@@ -15,8 +14,3 @@ services:
       - ./:/usr/src/
     ports:
       - 8080:8080
-    environment:
-      PORT: ${PORT:-8080}
-      K_SERVICE: sample-app
-      K_REVISION: 0
-      K_CONFIGURATION: sample-app 
