@@ -12,11 +12,11 @@ python manage.py runserver 0.0.0.0:8000
 ```
 
 ### Create a project with billing on google cloud
+- Make sure you have an account with $300 available and enable billing
+- You will enter credit card but they claim they wont auto bill after 3 months.
+- Enable ''ContainerRegistry'' for the project.
+- Create json key file and download
 ```
-Make sure you have an account with $300 available and enable billing
-You will enter credit card but they claim they wont auto bill after 3 months.
-Enable ''ContainerRegistry'' for the project.
-Create json key file and download
 cat keyfile.json | docker login -u _json_key --password-stdin https://gcr.io
 gcloud auth login
 gcloud run deploy cloudservice1 --project ${PROJECT} --image gcr.io/${PROJECT}/cloudbuild1 --platform managed
