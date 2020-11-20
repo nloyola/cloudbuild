@@ -1,17 +1,17 @@
 #cloudbuild.yaml
 # https://www.educative.io/blog/docker-compose-tutorial
 # docker-compose build web
-# docker tag cloudbuild_web gcr.io/tennisbana1/cloudbuild_web
-# docker push  gcr.io/tennisbana1/cloudbuild_web
+# docker tag cloudbuild_web gcr.io/${PROJECT_ID}/cloudbuild_web
+# docker push  gcr.io/${PROJECT_ID}/cloudbuild_web
 # docker-compose run -d -p 8080:8080  web
 # gcloud builds submit --config cloudbuild.yaml
 # 
 
 #steps:
-#- name: 'gcr.io/tennisbana1/docker-compose'
+#- name: 'gcr.io/${PROJECT_ID}/docker-compose'
 #  args: ['build','web']
 #steps:
-#- name: 'gcr.io/tennisbana1/docker-compose'
+#- name: 'gcr.io/${PROJECT_ID}/docker-compose'
 #  env:
 #    - 'PORT=8080'
 #  args: ['run','-p','-d','8080:8080','web']
@@ -21,16 +21,16 @@ steps:
 #- name: 'docker/compose:1.25.5'
 #  args: ['build', 'web']
 #- name: 'docker'
-#  args: ['tag','cloudbuild_web','gcr.io/tennisbana1/cloudbuild_web']
+#  args: ['tag','cloudbuild_web','gcr.io/${PROJECT_ID}/cloudbuild_web']
 #- name: 'docker'
-#  args: ['push','gcr.io/tennisbana1/cloudbuild_web']
+#  args: ['push','gcr.io/${PROJECT_ID}/cloudbuild_web']
 - name: 'gcr.io/cloud-builders/gcloud'
   args:
   - 'run'
   - 'deploy'
   - 'cloudrunservice4'
   - '--image'
-  - 'gcr.io/tennisbana1/cloudbuild_web'
+  - 'gcr.io/${PROJECT_ID}/cloudbuild_web'
   - '--region'
   - 'europe-north1'
   - '--platform'
