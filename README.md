@@ -91,9 +91,9 @@ gcloud builds submit --config cloudbuild1.yaml
 ###  Build locally with docker-compose build and deploy image
 ```
 docker-compose build web
-docker tag cloudbuild_web gcr.io/tennisbana1/cloudbuild_web
-docker push gcr.io/tennisbana1/cloudbuild_web
-gcloud run deploy cloudservice3  --project ${PROJECT_ID} --image gcr.io/tennisbana1/cloudbuild_web --platform managed
+docker tag cloudbuild_web gcr.io/${PROJECT_ID}/cloudbuild_web
+docker push gcr.io/${PROJECT_ID}/cloudbuild_web
+gcloud run deploy cloudservice3  --project ${PROJECT_ID} --image gcr.io/${PROJECT_ID}/cloudbuild_web --platform managed
 ```
 ### run docker-compose created container via cloudbuild.yaml
 ```
